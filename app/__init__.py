@@ -1,18 +1,18 @@
 from flask import Flask
 from flask_cors import CORS
 from app.extensions import Base, engine
-from app.routes.medicine_routes import medicine_bp
+from app.routes.motivation_routes import motivation_bp
 
 def create_app():
     app = Flask(__name__)
-
-    # Enable CORS
+    
+    # enable cros
     CORS(app)
 
-    # Create tables
+    # create tables
     Base.metadata.create_all(bind=engine)
 
-    # Register blueprint
-    app.register_blueprint(medicine_bp)
+    # register blueprint
+    app.register_blueprint(motivation_bp)
 
-    return app  # ← Jangan lupa ini!
+    return app
