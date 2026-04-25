@@ -8,16 +8,8 @@ motivation_bp = Blueprint("motivation", __name__)
 
 @motivation_bp.route("/", methods=["GET"])
 def index():
-    return {
-        "status": "running",
-        "message": "API Informasi Obat telah berjalan!",
-        "version": "2.0",
-        "endpoints": {
-            "generate": "POST /motivations/generate",
-            "get_all": "GET /motivations?page=1&per_page=10"
-        }
-    }
-
+    # Mengikuti gaya hardcore Ridho: Langsung return string nama tanpa JSON
+    return "API Informasi Obat telah berjalan! Dibuat oleh Rudi Ginting"
 
 @motivation_bp.route("/motivations/generate", methods=["POST"])
 def generate():
@@ -29,7 +21,7 @@ def generate():
     theme = data.get("theme")
     total = data.get("total")
 
-    # Validasi input
+    # Validasi input sesuai kebutuhan aplikasi obat Anda
     if not theme:
         return jsonify({"error": "Nama obat wajib diisi"}), 400
 
@@ -72,7 +64,7 @@ def get_all():
     page = request.args.get("page", default=1, type=int)
     per_page = request.args.get("per_page", default=100, type=int)
 
-    # Validasi parameter
+    # Validasi parameter pagination
     if page < 1:
         page = 1
     if per_page < 1 or per_page > 100:
